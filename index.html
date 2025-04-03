@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="calculator__output" id="output">0</div>
+        <div class="calculator__keys">
+          <button class="calculator__key calculator__key--operator" onclick="appendOperator('+')">+</button>
+          <button class="calculator__key calculator__key--operator" onclick="appendOperator('-')">-</button>
+          <button class="calculator__key calculator__key--operator" onclick="appendOperator('*')">&times;</button>
+          <button class="calculator__key calculator__key--operator" onclick="appendOperator('/')">÷</button>
+          <button class="calculator__key" onclick="appendNumber('7')">7</button>
+          <button class="calculator__key" onclick="appendNumber('8')">8</button>
+          <button class="calculator__key" onclick="appendNumber('9')">9</button>
+          <button class="calculator__key" onclick="appendNumber('4')">4</button>
+          <button class="calculator__key" onclick="appendNumber('5')">5</button>
+          <button class="calculator__key" onclick="appendNumber('6')">6</button>
+          <button class="calculator__key" onclick="appendNumber('1')">1</button>
+          <button class="calculator__key" onclick="appendNumber('2')">2</button>
+          <button class="calculator__key" onclick="appendNumber('3')">3</button>
+          <button class="calculator__key" onclick="appendNumber('0')">0</button>
+          <button class="calculator__key" onclick="appendDecimal()">.</button>
+          <button class="calculator__key" onclick="clearDisplay()">AC</button>
+          <button class="calculator__key calculator__key--enter" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+    
+    <script>
+        let output = document.getElementById("output");
+        let currentInput = "";
+        
+        function appendNumber(number) {
+            if (output.innerText === "0") {
+                output.innerText = number;
+            } else {
+                output.innerText += number;
+            }
+            currentInput += number;
+        }
+        
+        function appendOperator(operator) {
+            output.innerText += " " + operator + " ";
+            currentInput += operator;
+        }
+        
+        function appendDecimal() {
+            if (!currentInput.includes(".")) {
+                output.innerText += ".";
+                currentInput += ".";
+            }
+        }
+        
+        function clearDisplay() {
+            output.innerText = "0";
+            currentInput = "";
+        }
+        
+        function calculateResult() {
+            try {
+                output.innerText = eval(currentInput);
+                currentInput = output.innerText;
+            } catch {
+                output.innerText = "Error";
+                currentInput = "";
+            }
+        }
+    </script>
+</body>
+</html>
